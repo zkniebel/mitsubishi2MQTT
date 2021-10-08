@@ -34,7 +34,7 @@ ESP8266WebServer server(80);  // ESP8266 web
 #include <math.h>             // for rounding to Fahrenheit values
 
 #include <ArduinoOTA.h>   // for OTA
-#include <HeatPump.h>     // SwiCago library: https://github.com/SwiCago/HeatPump
+#include <HeatPumpEnhanced.h>     // SwiCago library: https://github.com/SwiCago/HeatPump
 //#include <Ticker.h>     // for LED status (Using a Wemos D1-Mini)
 #include "config.h"       // config file
 #include "html_common.h"  // common code HTML (like header, footer)
