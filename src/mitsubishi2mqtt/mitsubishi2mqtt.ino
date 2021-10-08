@@ -38,6 +38,7 @@ ESP8266WebServer server(80);  // ESP8266 web
 //#include <Ticker.h>     // for LED status (Using a Wemos D1-Mini)
 #include "config.h"       // config file
 #include "html_common.h"  // common code HTML (like header, footer)
+#include <HeatPumpEnhanced.h> // SwiCago library: https://github.com/SwiCago/HeatPump
 #include "javascript_common.h"  // common code javascript (like refresh page)
 #include "html_init.h"    // code html for initial config
 #include "html_menu.h"    // code html for menu
@@ -1278,7 +1279,7 @@ String hpGetAction(boolean hpoperating, String hppower, String hpmode) {
   else if (hpmode == "fan")     result = "fan";
   else if (!hpoperating)        result = "idle";
   else {
-    if (hpmode == "auto")       result = "idle";
+    if (hpmode == "auto") result = "auto";
     else if (hpmode == "cool")  result = "cooling";
     else if (hpmode == "heat")  result = "heating";
     else if (hpmode == "dry")   result = "drying";

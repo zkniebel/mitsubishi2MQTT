@@ -3,3 +3,5 @@
 .pio*
 *.bin
 build/
+
+/src/mitsubishi2mqtt/ZK_README.txt

@@ -26,7 +26,7 @@ const PROGMEM char* advance_conf = "/advance.json";
 const PROGMEM char* console_file = "/console.log";
 const PROGMEM char* others_conf = "/others.json";
 // pinouts
-const PROGMEM  uint8_t blueLedPin = 2;            // The ESP32 has an internal blue LED at D2 (GPIO 02)
+const PROGMEM  uint8_t blueLedPin = 0;            // The NodeMCU ESP8266 has an internal blue LED at D0 (GPIO 16)
 #else
 const PROGMEM char* wifi_conf = "wifi.json";
 const PROGMEM char* mqtt_conf = "mqtt.json";
@@ -34,15 +34,15 @@ const PROGMEM char* unit_conf = "unit.json";
 const PROGMEM char* console_file = "console.log";
 const PROGMEM char* others_conf = "others.json";
 // pinouts
-const PROGMEM  uint8_t blueLedPin = LED_BUILTIN; // Onboard LED = digital pin 2 "D4" (blue LED on WEMOS D1-Mini)
+const PROGMEM  uint8_t blueLedPin = LED_BUILTIN; // Onboard LED = digital pin 2 "D0" 
 #endif
-const PROGMEM  uint8_t redLedPin = 0;
+const PROGMEM  uint8_t redLedPin = 0; // Onboard LED = digital pin "D4" GPIO2
 
 // Define global variables for network
-const PROGMEM char* hostnamePrefix = "HVAC_";
 const PROGMEM uint32_t WIFI_RETRY_INTERVAL_MS = 300000;
 int wifi_timeout;
 bool wifi_config_exists;
+const PROGMEM char* hostnamePrefix = "Mitsubishi_HVAC_Control_";
 String hostname = "";
 String ap_ssid;
 String ap_pwd;
