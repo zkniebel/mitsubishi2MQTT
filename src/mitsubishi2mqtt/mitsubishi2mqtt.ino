@@ -1564,6 +1564,7 @@ void haConfig() {
 }
 
 void mqttConnect() {
+  /* ZK: COMMENTING OUT TO AVOID BLOCKING MAIN LOOP 
   // Loop until we're reconnected
   int attempts = 0;
   while (!mqtt_client.connected()) {
@@ -1581,6 +1582,19 @@ void mqttConnect() {
       }
     }
     // If state > 0 (MQTT_CONNECTED) => config or server problem we stop retry
+    else if (mqtt_client.state() > MQTT_CONNECTED) {
+      return;
+    } */
+  if (!mqtt_client.connected()) {
+    // record the reconnect attempt timestamp
+    lastMqttRetry = millis();
+    // Attempt to connect
+    mqtt_client.connect(mqtt_client_id.c_str(), mqtt_username.c_str(), mqtt_password.c_str());
+    // If state < 0 (MQTT_CONNECTED) => network problem - we failed to connect so return and let the main loop call for another attempt when ready
+    if (mqtt_client.state() < MQTT_CONNECTED) {
+      return;
+    }
+    // If state > 0 (MQTT_CONNECTED) => config or server problem so return and let the main loop call for another attempt when ready
     else if (mqtt_client.state() > MQTT_CONNECTED) {
       return;
     }
@@ -1753,7 +1767,7 @@ void loop() {
   		if (mqtt_client.state() < MQTT_CONNECTED)
   		{
   		  if ((millis() > (lastMqttRetry + MQTT_RETRY_INTERVAL_MS)) or lastMqttRetry == 0) {
-  			mqttConnect();
+  			  mqttConnect();
   		  }
   		}
   		//MQTT config problem on MQTT do nothing
