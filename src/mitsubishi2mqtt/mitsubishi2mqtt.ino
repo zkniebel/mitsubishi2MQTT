@@ -1748,22 +1748,22 @@ void loop() {
         hp.sync();
     }
 
-	if (mqtt_config) {
-		//MQTT failed retry to connect
-		if (mqtt_client.state() < MQTT_CONNECTED)
-		{
-		  if ((millis() > (lastMqttRetry + MQTT_RETRY_INTERVAL_MS)) or lastMqttRetry == 0) {
-			mqttConnect();
-		  }
-		}
-		//MQTT config problem on MQTT do nothing
-		else if (mqtt_client.state() > MQTT_CONNECTED ) return;
-		//MQTT connected send status
-		else {
-		  hpStatusChanged(hp.getStatus());
-		  mqtt_client.loop();
-		}
-	}
+  	if (mqtt_config) {
+  		//MQTT failed retry to connect
+  		if (mqtt_client.state() < MQTT_CONNECTED)
+  		{
+  		  if ((millis() > (lastMqttRetry + MQTT_RETRY_INTERVAL_MS)) or lastMqttRetry == 0) {
+  			mqttConnect();
+  		  }
+  		}
+  		//MQTT config problem on MQTT do nothing
+  		else if (mqtt_client.state() > MQTT_CONNECTED ) return;
+  		//MQTT connected send status
+  		else {
+  		  hpStatusChanged(hp.getStatus());
+  		  mqtt_client.loop();
+  		}
+  	}
   }
   else {
     dnsServer.processNextRequest();
